@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MedicalPlus — Your Trusted Online Pharmacy</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+  <!-- Header & Navigation -->
+  <header>
+    <nav class="navbar container">
+      <div class="logo">
+        <i class="fas fa-clinic-medical"></i> Pharma plus
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#faqs">FAQs</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li class="cart-icon">
+          <a href="#cart"><i class="fas fa-shopping-cart"></i></a>
+          <span class="cart-count">0</span>
+        </li>
+      </ul>
+      <button class="mobile-btn" id="menuBtn">
+        <i class="fas fa-bars"></i>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero container" id="home">
+    <div class="hero-content">
+      <h1>Your Health, <span>Our Priority</span></h1>
+      <p>MedicalPlus provides trusted medicines, healthcare products, and wellness supplies — delivered safely to your doorstep.</p>
+      <div class="cta">
+        <a href="#shop" class="btn primary">Shop Now</a>
+        <a href="#services" class="btn ghost">Our Services</a>
+      </div>
+    </div>
+    <div class="hero-img">
+      <i class="fas fa-pills"></i>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services container" id="services">
+    <h2 class="section-title">Our Services</h2>
+    <div class="grid">
+      <div class="card">
+        <i class="fas fa-prescription-bottle-alt"></i>
+        <h3>Online Pharmacy</h3>
+        <p>Order prescription & OTC medicines with trusted quality and fast delivery.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-vial"></i>
+        <h3>Lab Tests</h3>
+        <p>Book diagnostic tests and get reports delivered securely to your email.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-user-md"></i>
+        <h3>Doctor Consultation</h3>
+        <p>Schedule online consultations with licensed healthcare professionals.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="products container" id="shop">
+    <h2 class="section-title">Featured Products</h2>
+    <div class="grid" id="featuredProducts">
+      <!-- Products will be loaded dynamically -->
+    </div>
+    <div class="view-all">
+      <a href="#products" class="btn primary">View All Products</a>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features container">
+    <h2 class="section-title">Why Choose MedicalPlus?</h2>
+    <div class="grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <div class="feature-content">
+          <h3>Authentic Medicines</h3>
+          <p>100% genuine medications sourced directly from licensed manufacturers.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-truck"></i>
+        </div>
+        <div class="feature-content">
+          <h3>Fast Delivery</h3>
+          <p>Free delivery on orders above $30. Express delivery options available.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-headset"></i>
+        </div>
+        <div class="feature-content">
+          <h3>24/7 Support</h3>
+          <p>Our healthcare experts are available round the clock to assist you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+   <button id="scrollToTopBtn" class="scroll-to-top" aria-label="Scroll to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+
+  <!-- Testimonials -->
+  <section class="testimonials container">
+    <h2 class="section-title">What Our Customers Say</h2>
+    <div class="grid">
+      <div class="testimonial-card">
+        <i class="fas fa-quote-right"></i>
+        <div class="rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <p>"MedicalPlus delivers fast and the medicines are always genuine. Their customer service is exceptional!"</p>
+        <h4>- Sarah K.</h4>
+      </div>
+      <div class="testimonial-card">
+        <i class="fas fa-quote-right"></i>
+        <div class="rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <p>"I booked lab tests and got reports the same day. Super convenient service during these busy times!"</p>
+        <h4>- John D.</h4>
+      </div>
+      <div class="testimonial-card">
+        <i class="fas fa-quote-right"></i>
+        <div class="rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+        </div>
+        <p>"Great customer service and very easy to use website. The doctors available for consultation are very knowledgeable."</p>
+        <h4>- Ayesha R.</h4>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="newsletter">
+    <div class="container">
+      <h2>Stay Healthy with Our Updates</h2>
+      <p>Subscribe to our newsletter for health tips, new products, and exclusive offers.</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Enter your email address" required>
+        <button type="submit" class="btn primary">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>MedicalPlus</h3>
+          <p>Your trusted healthcare partner providing quality medicines and healthcare services since 2010.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#shop">Shop</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Our Services</h3>
+          <ul>
+            <li><a href="#">Online Pharmacy</a></li>
+            <li><a href="#">Lab Tests</a></li>
+            <li><a href="#">Doctor Consultation</a></li>
+            <li><a href="#">Health Packages</a></li>
+            <li><a href="#">Corporate Health</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Contact Info</h3>
+          <ul class="contact-info">
+            <li><i class="fas fa-map-marker-alt"></i> 123 Health Street, Medical District</li>
+            <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+            <li><i class="fas fa-envelope"></i> info@medicalplus.com</li>
+            <li><i class="fas fa-clock"></i> 24/7 Service</li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2025 MedicalPlus. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="js/app.js"></script>
+</body>
+</html>
