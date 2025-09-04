@@ -11,6 +11,7 @@ const PRODUCTS = [
 ];
 
 const COUPONS = { MED10: 10, WELCOME5: 5 };
+let appliedCoupon = localStorage.getItem('medicalplus_coupon') || '';
 
 /***************
  * HELPERS
@@ -57,6 +58,30 @@ const addToCart = (productId) => {
   localStorage.setItem('medicalplus_cart', JSON.stringify(cart));
   updateCartCount();
   showNotification(`${product.name} added to cart!`);
+  renderCart();
+};
+
+const removeFromCart = (productId) => {
+  cart = cart.filter(item => item.id !== productId);
+  localStorage.setItem('medicalplus_cart', JSON.stringify(cart));
+  updateCartCount();
+  renderCart();
+};
+
+const updateQuantity = (productId, delta) => {
+  const item = cart.find(i => i.id === productId);
+  if (!item) return;
+  item.quantity = Math.max(1, item.quantity + delta);
+  localStorage.setItem('medicalplus_cart', JSON.stringify(cart));
+  updateCartCount();
+  renderCart();
+};
+
+const computeTotals = () => {
+  const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const discount = appliedCoupon && COUPONS[appliedCoupon.toUpperCase()] ? (subtotal * COUPONS[appliedCoupon.toUpperCase()] / 100) : 0;
+  const total = Math.max(0, subtotal - discount);
+  return { subtotal, discount, total };
 };
 
 /***************
@@ -79,6 +104,67 @@ const renderFeaturedProducts = () => {
       </div>
     </div>
   `).join('');
+};
+
+const renderCart = () => {
+  const itemsRoot = document.getElementById('cartItems');
+  const subtotalEl = document.getElementById('cartSubtotal');
+  const totalEl = document.getElementById('cartTotal');
+  const couponInput = document.getElementById('couponInput');
+  if (couponInput) couponInput.value = appliedCoupon || '';
+  if (!itemsRoot || !subtotalEl || !totalEl) return;
+
+  if (cart.length === 0) {
+    itemsRoot.innerHTML = `
+      <div class="card" style="text-align:center; padding:30px;">
+        <i class="fas fa-bag-shopping" style="font-size:2rem;color:var(--primary);"></i>
+        <p style="margin-top:10px;color:var(--muted);">Your cart is empty. Explore products to add items.</p>
+      </div>
+    `;
+  } else {
+    itemsRoot.innerHTML = cart.map(item => `
+      <div class="cart-item">
+        <div class="cart-item__icon">${item.icon || '🛒'}</div>
+        <div>
+          <div class="cart-item__name">${item.name}</div>
+          <div class="cart-item__price">${fmt(item.price)}</div>
+          <div class="qty" aria-label="Quantity selector">
+            <button onclick="updateQuantity('${item.id}', -1)" aria-label="Decrease quantity"><i class="fas fa-minus"></i></button>
+            <span>${item.quantity}</span>
+            <button onclick="updateQuantity('${item.id}', 1)" aria-label="Increase quantity"><i class="fas fa-plus"></i></button>
+          </div>
+        </div>
+        <div>
+          <button class="btn ghost" onclick="removeFromCart('${item.id}')" aria-label="Remove item"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  const { subtotal, total } = computeTotals();
+  subtotalEl.textContent = fmt(subtotal);
+  totalEl.textContent = fmt(total);
+};
+
+const openCart = () => {
+  const drawer = document.getElementById('cartDrawer');
+  const backdrop = document.getElementById('cartBackdrop');
+  if (!drawer || !backdrop) return;
+  drawer.classList.add('open');
+  drawer.setAttribute('aria-hidden', 'false');
+  backdrop.classList.add('show');
+  backdrop.setAttribute('aria-hidden', 'false');
+  renderCart();
+};
+
+const closeCart = () => {
+  const drawer = document.getElementById('cartDrawer');
+  const backdrop = document.getElementById('cartBackdrop');
+  if (!drawer || !backdrop) return;
+  drawer.classList.remove('open');
+  drawer.setAttribute('aria-hidden', 'true');
+  backdrop.classList.remove('show');
+  backdrop.setAttribute('aria-hidden', 'true');
 };
 
 const showNotification = (message, type = 'success') => {
@@ -201,6 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateCartCount();
   setupMobileNav();
   setupSmoothScroll();
+  setupCartUI();
   
   // Newsletter form submission
   const newsletterForm = $('.newsletter-form');
@@ -254,6 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateCartCount();
   setupMobileNav();
   setupSmoothScroll();
+  setupCartUI();
   
   // Add scroll to top functionality
   setupScrollToTop();
@@ -271,3 +359,88 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+/***************
+ * CART UI SETUP AND FAQ/CONTACT LOGIC
+ ***************/
+const setupCartUI = () => {
+  const cartIconLink = document.querySelector('.cart-icon a');
+  const closeBtn = document.getElementById('cartCloseBtn');
+  const backdrop = document.getElementById('cartBackdrop');
+  const applyCouponBtn = document.getElementById('applyCouponBtn');
+  const couponInput = document.getElementById('couponInput');
+  const checkoutBtn = document.getElementById('checkoutBtn');
+
+  if (cartIconLink) {
+    cartIconLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      openCart();
+    });
+  }
+  if (closeBtn) closeBtn.addEventListener('click', closeCart);
+  if (backdrop) backdrop.addEventListener('click', closeCart);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeCart(); });
+
+  if (applyCouponBtn && couponInput) {
+    applyCouponBtn.addEventListener('click', () => {
+      const code = (couponInput.value || '').trim().toUpperCase();
+      if (COUPONS[code]) {
+        appliedCoupon = code;
+        localStorage.setItem('medicalplus_coupon', appliedCoupon);
+        showNotification(`Coupon ${code} applied!`);
+        renderCart();
+      } else if (code === '') {
+        appliedCoupon = '';
+        localStorage.removeItem('medicalplus_coupon');
+        showNotification('Coupon cleared');
+        renderCart();
+      } else {
+        showNotification('Invalid coupon code', 'error');
+      }
+    });
+  }
+
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', () => {
+      if (cart.length === 0) {
+        showNotification('Your cart is empty', 'error');
+        return;
+      }
+      const { total } = computeTotals();
+      showNotification(`Checkout successful! Paid ${fmt(total)}.`);
+      cart = [];
+      localStorage.setItem('medicalplus_cart', JSON.stringify(cart));
+      updateCartCount();
+      renderCart();
+      closeCart();
+    });
+  }
+
+  // FAQ accordion
+  $$('.faq-item .faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      item.classList.toggle('open');
+    });
+  });
+
+  // Contact form validation
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name');
+      const email = document.getElementById('email');
+      const message = document.getElementById('message');
+      const valid = name.value.trim().length >= 2 && /.+@.+\..+/.test(email.value) && message.value.trim().length >= 10;
+      if (!valid) {
+        showNotification('Please complete the form correctly.', 'error');
+        return;
+      }
+      showNotification('Thanks! We\'ll get back to you soon.');
+      name.value = '';
+      email.value = '';
+      message.value = '';
+    });
+  }
+};

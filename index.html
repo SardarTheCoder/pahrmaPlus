@@ -32,9 +32,33 @@
     </nav>
   </header>
 
+  <!-- Cart Drawer -->
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+    <div class="cart-drawer__header">
+      <h3><i class="fas fa-shopping-basket"></i> Your Cart</h3>
+      <button class="cart-drawer__close" id="cartCloseBtn" aria-label="Close cart"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="cart-drawer__body" id="cartItems">
+      <!-- Cart items injected here -->
+    </div>
+    <div class="cart-drawer__footer">
+      <div class="cart-summary">
+        <div class="row"><span>Subtotal</span><strong id="cartSubtotal">$0.00</strong></div>
+        <div class="row">
+          <label for="couponInput" class="sr-only">Coupon</label>
+          <input type="text" id="couponInput" placeholder="Coupon code (e.g., MED10)">
+          <button class="btn ghost" id="applyCouponBtn">Apply</button>
+        </div>
+        <div class="row total"><span>Total</span><strong id="cartTotal">$0.00</strong></div>
+      </div>
+      <button class="btn primary" id="checkoutBtn"><i class="fas fa-credit-card"></i> Checkout</button>
+    </div>
+  </aside>
+  <div class="cart-backdrop" id="cartBackdrop" aria-hidden="true"></div>
+
   <!-- Hero Section -->
-  <section class="hero container" id="home">
-    <div class="hero-content">
+  <section class="hero" id="home">
+    <div class="container hero-content">
       <h1>Your Health, <span>Our Priority</span></h1>
       <p>MedicalPlus provides trusted medicines, healthcare products, and wellness supplies — delivered safely to your doorstep.</p>
       <div class="cta">
@@ -48,67 +72,139 @@
   </section>
 
   <!-- Services Section -->
-  <section class="services container" id="services">
-    <h2 class="section-title">Our Services</h2>
-    <div class="grid">
-      <div class="card">
+  <section class="services" id="services">
+    <div class="container">
+      <h2 class="section-title"><i class="fas fa-briefcase-medical"></i> Our Services</h2>
+      <div class="grid">
+        <div class="card">
         <i class="fas fa-prescription-bottle-alt"></i>
         <h3>Online Pharmacy</h3>
         <p>Order prescription & OTC medicines with trusted quality and fast delivery.</p>
-      </div>
-      <div class="card">
+        </div>
+        <div class="card">
         <i class="fas fa-vial"></i>
         <h3>Lab Tests</h3>
         <p>Book diagnostic tests and get reports delivered securely to your email.</p>
-      </div>
-      <div class="card">
+        </div>
+        <div class="card">
         <i class="fas fa-user-md"></i>
         <h3>Doctor Consultation</h3>
         <p>Schedule online consultations with licensed healthcare professionals.</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Featured Products -->
-  <section class="products container" id="shop">
-    <h2 class="section-title">Featured Products</h2>
-    <div class="grid" id="featuredProducts">
-      <!-- Products will be loaded dynamically -->
+  <section class="products" id="shop">
+    <div class="container">
+      <h2 class="section-title"><i class="fas fa-capsules"></i> Featured Products</h2>
+      <div class="grid" id="featuredProducts">
+        <!-- Products will be loaded dynamically -->
+      </div>
+      <div class="view-all">
+        <a href="#products" class="btn primary">View All Products</a>
+      </div>
     </div>
-    <div class="view-all">
-      <a href="#products" class="btn primary">View All Products</a>
+  </section>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+    <div class="container">
+      <h2 class="section-title"><i class="fas fa-heartbeat"></i> About MedicalPlus</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Our Mission</h3>
+          <p>To make quality healthcare accessible and delightful through trusted products, caring service, and smart technology.</p>
+        </div>
+        <div class="card">
+          <h3>What We Do</h3>
+          <p>We curate genuine medicines and wellness essentials, enable home diagnostics, and connect you to licensed doctors online.</p>
+        </div>
+        <div class="card">
+          <h3>Why It Matters</h3>
+          <p>Health shouldn’t be complex. We simplify your journey with safe, transparent, and dependable experiences.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQs Section -->
+  <section class="faqs" id="faqs">
+    <div class="container">
+      <h2 class="section-title"><i class="fas fa-question-circle"></i> FAQs</h2>
+      <div class="faq-list" id="faqList">
+        <div class="faq-item">
+          <button class="faq-question">How do I upload a prescription? <i class="fas fa-chevron-down"></i></button>
+          <div class="faq-answer"><p>At checkout, you can upload a clear photo of your prescription. Our pharmacists verify it before fulfillment.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">What are the delivery timelines? <i class="fas fa-chevron-down"></i></button>
+          <div class="faq-answer"><p>Standard delivery is 2-3 days. Express delivery within 24 hours is available in select locations.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Are consultations secure? <i class="fas fa-chevron-down"></i></button>
+          <div class="faq-answer"><p>Yes, all consultations are encrypted and conducted by licensed professionals on a secure platform.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2 class="section-title"><i class="fas fa-envelope-open-text"></i> Contact Us</h2>
+      <form class="contact-form" id="contactForm">
+        <div class="grid">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Your full name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="you@example.com" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" rows="4" placeholder="Tell us how we can help" required></textarea>
+        </div>
+        <button type="submit" class="btn primary"><i class="fas fa-paper-plane"></i> Send Message</button>
+      </form>
     </div>
   </section>
 
   <!-- Features Section -->
-  <section class="features container">
-    <h2 class="section-title">Why Choose MedicalPlus?</h2>
-    <div class="grid">
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-shield-alt"></i>
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title"><i class="fas fa-star-of-life"></i> Why Choose MedicalPlus?</h2>
+      <div class="grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <div class="feature-content">
+            <h3>Authentic Medicines</h3>
+            <p>100% genuine medications sourced directly from licensed manufacturers.</p>
+          </div>
         </div>
-        <div class="feature-content">
-          <h3>Authentic Medicines</h3>
-          <p>100% genuine medications sourced directly from licensed manufacturers.</p>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-truck"></i>
+          </div>
+          <div class="feature-content">
+            <h3>Fast Delivery</h3>
+            <p>Free delivery on orders above $30. Express delivery options available.</p>
+          </div>
         </div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-truck"></i>
-        </div>
-        <div class="feature-content">
-          <h3>Fast Delivery</h3>
-          <p>Free delivery on orders above $30. Express delivery options available.</p>
-        </div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-headset"></i>
-        </div>
-        <div class="feature-content">
-          <h3>24/7 Support</h3>
-          <p>Our healthcare experts are available round the clock to assist you.</p>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-headset"></i>
+          </div>
+          <div class="feature-content">
+            <h3>24/7 Support</h3>
+            <p>Our healthcare experts are available round the clock to assist you.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -119,10 +215,11 @@
 
 
   <!-- Testimonials -->
-  <section class="testimonials container">
-    <h2 class="section-title">What Our Customers Say</h2>
-    <div class="grid">
-      <div class="testimonial-card">
+  <section class="testimonials">
+    <div class="container">
+      <h2 class="section-title"><i class="fas fa-comments"></i> What Our Customers Say</h2>
+      <div class="grid">
+        <div class="testimonial-card">
         <i class="fas fa-quote-right"></i>
         <div class="rating">
           <i class="fas fa-star"></i>
@@ -133,8 +230,8 @@
         </div>
         <p>"MedicalPlus delivers fast and the medicines are always genuine. Their customer service is exceptional!"</p>
         <h4>- Sarah K.</h4>
-      </div>
-      <div class="testimonial-card">
+        </div>
+        <div class="testimonial-card">
         <i class="fas fa-quote-right"></i>
         <div class="rating">
           <i class="fas fa-star"></i>
@@ -145,8 +242,8 @@
         </div>
         <p>"I booked lab tests and got reports the same day. Super convenient service during these busy times!"</p>
         <h4>- John D.</h4>
-      </div>
-      <div class="testimonial-card">
+        </div>
+        <div class="testimonial-card">
         <i class="fas fa-quote-right"></i>
         <div class="rating">
           <i class="fas fa-star"></i>
@@ -157,6 +254,7 @@
         </div>
         <p>"Great customer service and very easy to use website. The doctors available for consultation are very knowledgeable."</p>
         <h4>- Ayesha R.</h4>
+        </div>
       </div>
     </div>
   </section>
