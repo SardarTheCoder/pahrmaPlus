@@ -76,21 +76,21 @@
     <div class="container">
       <h2 class="section-title"><i class="fas fa-briefcase-medical"></i> Our Services</h2>
       <div class="grid">
-        <div class="card">
+        <a class="card" href="pharmacy.html" aria-label="Open Online Pharmacy page">
         <i class="fas fa-prescription-bottle-alt"></i>
         <h3>Online Pharmacy</h3>
         <p>Order prescription & OTC medicines with trusted quality and fast delivery.</p>
-        </div>
-        <div class="card">
+        </a>
+        <a class="card" href="lab-tests.html" aria-label="Open Lab Tests page">
         <i class="fas fa-vial"></i>
         <h3>Lab Tests</h3>
         <p>Book diagnostic tests and get reports delivered securely to your email.</p>
-        </div>
-        <div class="card">
+        </a>
+        <a class="card" href="consultation.html" aria-label="Open Doctor Consultation page">
         <i class="fas fa-user-md"></i>
         <h3>Doctor Consultation</h3>
         <p>Schedule online consultations with licensed healthcare professionals.</p>
-        </div>
+        </a>
       </div>
     </div>
   </section>
@@ -129,26 +129,36 @@
     </div>
   </section>
 
-  <!-- FAQs Section -->
-  <section class="faqs" id="faqs">
-    <div class="container">
-      <h2 class="section-title"><i class="fas fa-question-circle"></i> FAQs</h2>
-      <div class="faq-list" id="faqList">
-        <div class="faq-item">
-          <button class="faq-question">How do I upload a prescription? <i class="fas fa-chevron-down"></i></button>
-          <div class="faq-answer"><p>At checkout, you can upload a clear photo of your prescription. Our pharmacists verify it before fulfillment.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question">What are the delivery timelines? <i class="fas fa-chevron-down"></i></button>
-          <div class="faq-answer"><p>Standard delivery is 2-3 days. Express delivery within 24 hours is available in select locations.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question">Are consultations secure? <i class="fas fa-chevron-down"></i></button>
-          <div class="faq-answer"><p>Yes, all consultations are encrypted and conducted by licensed professionals on a secure platform.</p></div>
-        </div>
+<section class="faqs" id="faqs">
+  <div class="container">
+    <h2 class="section-title"><i class="fas fa-question-circle"></i> FAQs</h2>
+    <div class="faq-controls" style="max-width:900px;margin:0 auto 20px;display:flex;gap:10px;align-items:center;">
+      <label for="faqSelect" class="sr-only">Select a question</label>
+      <select id="faqSelect" style="flex:1;padding:12px 14px;border:1px solid #e2e8f0;border-radius:10px;">
+        <option value="">Jump to a question…</option>
+        <option value="faq-prescription">How do I upload a prescription?</option>
+        <option value="faq-delivery">What are the delivery timelines?</option>
+        <option value="faq-security">Are consultations secure?</option>
+      </select>
+      <button id="faqGoBtn" class="btn ghost" aria-label="Go to selected question">Go</button>
+    </div>
+    <div class="faq-list" id="faqList">
+      <div class="faq-item" id="faq-prescription">
+        <button class="faq-question">How do I upload a prescription? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-answer"><p>At checkout, you can upload a clear photo of your prescription. Our pharmacists verify it before fulfillment.</p></div>
+      </div>
+      <div class="faq-item" id="faq-delivery">
+        <button class="faq-question">What are the delivery timelines? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-answer"><p>Standard delivery is 2-3 days. Express delivery within 24 hours is available in select locations.</p></div>
+      </div>
+      <div class="faq-item" id="faq-security">
+        <button class="faq-question">Are consultations secure? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-answer"><p>Yes, all consultations are encrypted and conducted by licensed professionals on a secure platform.</p></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- Contact Section -->
   <section class="contact" id="contact">

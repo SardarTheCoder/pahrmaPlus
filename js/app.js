@@ -288,6 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupMobileNav();
   setupSmoothScroll();
   setupCartUI();
+  setupFaqDropdown();
   
   // Newsletter form submission
   const newsletterForm = $('.newsletter-form');
@@ -342,6 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupMobileNav();
   setupSmoothScroll();
   setupCartUI();
+  setupFaqDropdown();
   
   // Add scroll to top functionality
   setupScrollToTop();
@@ -416,13 +418,14 @@ const setupCartUI = () => {
     });
   }
 
-  // FAQ accordion
-  $$('.faq-item .faq-question').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const item = btn.closest('.faq-item');
-      item.classList.toggle('open');
-    });
+ // FAQ accordion
+$$('.faq-item .faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    item.classList.toggle('open');
   });
+});
+
 
   // Contact form validation
   const contactForm = document.getElementById('contactForm');
@@ -443,4 +446,25 @@ const setupCartUI = () => {
       message.value = '';
     });
   }
+};
+
+const setupFaqDropdown = () => {
+  const select = document.getElementById('faqSelect');
+  const goBtn = document.getElementById('faqGoBtn');
+  if (!select || !goBtn) return;
+
+  const goToSelected = () => {
+    const id = select.value;
+    if (!id) return;
+    const item = document.getElementById(id);
+    if (!item) return;
+    // Open the item
+    item.classList.add('open');
+    // Smooth scroll into view, compensate for sticky header
+    const y = item.getBoundingClientRect().top + window.pageYOffset - 90;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  };
+
+  goBtn.addEventListener('click', goToSelected);
+  select.addEventListener('change', goToSelected);
 };
